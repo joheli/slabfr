@@ -1,6 +1,5 @@
 package slabfr;
 
-// import it.sauronsoftware.cron4j.Scheduler;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -15,7 +14,7 @@ import java.util.logging.SimpleFormatter;
 
 public class Start implements Runnable {
 
-	private static String version = "0.4.6";
+	private static String version = "0.4.7";
 	Logger logger;
 	FileHandler fH;
 	private boolean veraendereExportZiel = false;
@@ -124,7 +123,7 @@ public class Start implements Runnable {
 					* tagSchwelle * 24 * 60 * 60 * 1000L) {
 				logger.log(
 						Level.FINE,
-						"Die Abfrage wird zerlegt, da der Zeitabstand \u00fcber dem Doppelten der Tagschwelle (={0} Tage) liegt",
+						"Die Abfrage wird zerlegt, da der Zeitabstand über dem Doppelten der Tagschwelle (={0} Tage) liegt",
 						tagSchwelle);
 				dKette = Helfer.datumKette2(vonC, bisC, tagSchwelle);
 				for (int x = 0; x < dKette.size(); x++) {
@@ -184,17 +183,9 @@ public class Start implements Runnable {
 			Start s = new Start();
 			if (args.length > 0) {
 				try {
-					// Scheduler sch = new Scheduler();
 					s.p = Helfer.parameterLeser(new File(args[0]));
 					s.logger.log(Level.INFO, "Parameterdatei ok.");
 					s.run();
-					/**if (s.p.get("TerminPlan") != null) {
-						s.veraendereExportZiel = true;
-						sch.schedule(s.p.get("TerminPlan"), s);
-						sch.start();
-					} else {
-						s.run();
-					} */
 				} catch (Exception e) {
 					s.logger.log(Level.SEVERE, e.getMessage());
 				} finally {
@@ -240,16 +231,5 @@ public class Start implements Runnable {
 
 	public void run() {
 		abfrageProzedur();
-/**		if (this.p.containsKey("FolgeAnweisung")) {
-			String cmd = this.p.get("FolgeAnweisung");
-			try {
-				Utils.exec(cmd);
-				logger.log(Level.INFO, "Anweisung ausgef?hrt: {0}", cmd);
-			} catch (Exception e) {
-				logger.log(Level.SEVERE,
-						"Folgende Anweisung erzeugte Fehler: {0}", cmd);
-				logger.log(Level.SEVERE, e.getMessage());
-			}
-		} */
 	}
 }

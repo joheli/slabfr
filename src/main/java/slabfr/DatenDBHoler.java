@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 
 public class DatenDBHoler extends DateiLeser {
 
-	//private static final long serialVersionUID = 1L;
 	private Connection con;
     private String call;
     private Object[] parameter;
