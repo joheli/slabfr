@@ -32,7 +32,7 @@ ExportZiel=test.csv
 
 | TagSchwelle: Um größere Zeiträume abzudecken, ist es erforderlich, diese zu zerteilen, da diese von den Prozeduren
 | nicht bearbeitet werden.
-| Standardwert 28 Tage, d.h. der von @DATUMVON und @DATUMBIS abgesteckte Zeitraum wird in Teilen von 28 Tagen
-| Länge zerteilt.
-| Zur Änderung bitte folgende Zeile Entkommentieren:
+| Der Standardwert ist 28 Tage, d.h. der von @DATUMVON und @DATUMBIS abgesteckte Zeitraum wird in Stücke von 28 Tagen
+| Länge zerteilt, die nach und nach abgefragt werden.
+| Zur Änderung bitte folgende Zeile entkommentieren:
 | TagSchwelle=28
