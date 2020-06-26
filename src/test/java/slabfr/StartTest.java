@@ -13,8 +13,8 @@ public class StartTest {
         assertNotNull("Start should have a logger", classUnderTest.logger);
     }
     
-    @Test public void testStartHasParameters() throws SecurityException, IOException {
+    @Test public void testStartHasFileHandler() throws SecurityException, IOException {
         Start classUnderTest = new Start();
-        assertNotNull("Start should have a parameters", classUnderTest.p);
+        assertNotNull("Start should have a file handler", classUnderTest.fH);
     }
 }

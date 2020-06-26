@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class DatenDBHoler extends DateiLeser {
 
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	private Connection con;
     private String call;
     private Object[] parameter;
@@ -44,8 +44,8 @@ public class DatenDBHoler extends DateiLeser {
         logger.log(Level.FINEST, "Versuche Verbindung zu {0} herzustellen...", ip);
         String sl_dburl = "jdbc:jtds:sybase://" + ip;
         Class.forName(Helfer.SL_DRIVER);
-		    String sl_user = System.getenv("SL_USER");
-		    String sl_pass = System.getenv("SL_PASS");
+		    String sl_user = System.getenv("SL_USER"); // Umgebungsvariable muss gesetzt sein!
+		    String sl_pass = System.getenv("SL_PASS"); // Umgebungsvariable muss gesetzt sein!
         this.con = DriverManager.getConnection(sl_dburl, sl_user, sl_pass);
         logger.finest("Verbindung steht.");
     }
@@ -88,7 +88,7 @@ public class DatenDBHoler extends DateiLeser {
         int i = 1;
 
         if (ausgabeFelder != null) {
-            logger.finest("Nur ausgew\u00e4hlte Spalten werden eingebunden.");
+            logger.finest("Nur ausgewählte Spalten werden eingebunden.");
             for (i = 1; i <= spaltenAnz; i++) {
                 if (feldKommtInErgebnis(rs.getMetaData().getColumnName(i), ausgabeFelder)) {
                     spaltenNr.add(Integer.valueOf(i));
@@ -116,7 +116,7 @@ public class DatenDBHoler extends DateiLeser {
             zeilenAnz++;
         }
 
-        logger.log(Level.FINEST, "Abfrage erfolgreich. Es wurden {0} Datens\u00e4tze zur\u00fcckgeliefert.", zeilenAnz);
+        logger.log(Level.FINEST, "Abfrage erfolgreich. Es wurden {0} Datensätze zurückgeliefert.", zeilenAnz);
 
         rs = null;
         cs = null;

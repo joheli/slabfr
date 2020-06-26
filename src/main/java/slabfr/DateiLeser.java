@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 public class DateiLeser extends ArrayList<String[]> implements ImportDaten {
     
-	private static final long serialVersionUID = 8543228223778338588L;
+	// private static final long serialVersionUID = 8543228223778338588L;
 	Iterator<String[]> i = null;
     String[] zeile = null;
     
