@@ -1,6 +1,6 @@
 package slabfr;
 
-import it.sauronsoftware.cron4j.Scheduler;
+// import it.sauronsoftware.cron4j.Scheduler;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -15,7 +15,7 @@ import java.util.logging.SimpleFormatter;
 
 public class Start implements Runnable {
 
-	private static String version = "0.4.5";
+	private static String version = "0.4.6";
 	Logger logger;
 	FileHandler fH;
 	private boolean veraendereExportZiel = false;
@@ -140,7 +140,7 @@ public class Start implements Runnable {
 					}
 
 					logger.log(Level.FINE,
-							"\u00dcbermittle Teilabfrage {0} ...", anzAbfragen);
+							"übermittle Teilabfrage {0} ...", anzAbfragen);
 					anzAbfragen++;
 					dbh = new DatenDBHoler(ip, call, parameter, ausgabeFelder);
 					
@@ -184,16 +184,17 @@ public class Start implements Runnable {
 			Start s = new Start();
 			if (args.length > 0) {
 				try {
-					Scheduler sch = new Scheduler();
+					// Scheduler sch = new Scheduler();
 					s.p = Helfer.parameterLeser(new File(args[0]));
 					s.logger.log(Level.INFO, "Parameterdatei ok.");
-					if (s.p.get("TerminPlan") != null) {
+					s.run();
+					/**if (s.p.get("TerminPlan") != null) {
 						s.veraendereExportZiel = true;
 						sch.schedule(s.p.get("TerminPlan"), s);
 						sch.start();
 					} else {
 						s.run();
-					}
+					} */
 				} catch (Exception e) {
 					s.logger.log(Level.SEVERE, e.getMessage());
 				} finally {
@@ -210,7 +211,7 @@ public class Start implements Runnable {
 
 	private void hilfe() {
 		System.out.println();
-		System.out.println("Gebrauch des Programmes SLAbfr, Version " + version
+		System.out.println("Gebrauch des Programmes slabfr, Version " + version
 				+ ":");
 		System.out.println();
 		if (System.getProperty("os.name").equalsIgnoreCase("Linux")) {
@@ -225,7 +226,7 @@ public class Start implements Runnable {
 		if (!exportZiel.contains(".")) {
 			logger.log(
 					Level.WARNING,
-					"Exportziel hat keine vern\u00fcnftige Dateiendung. Es wird Standarddatei 'export.csv' gew?hlt.");
+					"Exportziel hat keine vernünftige Dateiendung. Es wird Standarddatei 'export.csv' gewählt.");
 			exportZiel = "export.csv";
 		}
 		// wo ist der letzte Punkt?
@@ -233,7 +234,7 @@ public class Start implements Runnable {
 		String prefix = exportZiel.substring(0, i);
 		String suffix = exportZiel.substring(i, exportZiel.length());
 
-		// gib es zur?ck
+		// gib es zurück
 		return prefix + zusatz + suffix;
 	}
 
