@@ -1,0 +1,36 @@
+| Parameterdatei für das Abfrageprogramm slabfr
+
+| IP: Adresse der Datenbank
+IP=192.168.43.29:5000
+
+| Abfrage: Name der Prozedur ("stored procedure")
+Abfrage=PR_SUCHEWERTE
+
+| Abfrageparameter
+@DATUMVON=01.01.2019
+@DATUMBIS=19.01.2019
+@CODE1='mKEIM'
+@GLEICH1='%Bacteroides%'
+@CODE2='mMER'
+@GLEICH2='%'
+
+| weitere Abfrageparameter
+|@AKTIV=1
+|@LAUF=7
+|@MULTITYP=4
+@ART='R'
+@MITPROBE=1
+@PROBEAKTIV=1
+
+| Welche Felder sollen inkludiert werden (optional)
+Felder=AUFTRAGNR,AUFTRAGDAT,PATISTAMMNR,PATIFALLNR,SCHEINID,EINSCODE,ABNAHMEDAT,ERGEBNIST1,ERGEBNIST2
+
+| ExportZiel: Pfad der Exportdatei.
+ExportZiel=test.csv
+
+| TagSchwelle: Um größere Zeiträume abzudecken, ist es erforderlich, diese zu zerteilen, da diese von den Prozeduren
+| nicht bearbeitet werden.
+| Standardwert 28 Tage, d.h. der von @DATUMVON und @DATUMBIS abgesteckte Zeitraum wird in Teilen von 28 Tagen
+| Länge zerteilt.
+| Zur Änderung bitte folgende Zeile Entkommentieren:
+| TagSchwelle=28
