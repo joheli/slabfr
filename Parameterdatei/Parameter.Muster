@@ -1,12 +1,13 @@
 | Parameterdatei für das Abfrageprogramm slabfr
 
-| IP: Adresse der Datenbank
+| IP: Adresse der Datenbank, erforderlich
 IP=192.168.43.29:5000
 
-| Abfrage: Name der Prozedur ("stored procedure")
+| Abfrage: Name der Prozedur ("stored procedure"), erforderlich
 Abfrage=PR_SUCHEWERTE
 
 | Abfrageparameter
+| Hierbei sind @DATUMVON und @DATUMBIS immer erforderlich, der Rest richtet sich nach der Abfrage.
 @DATUMVON=01.01.2019
 @DATUMBIS=19.01.2019
 @CODE1='mKEIM'
@@ -14,7 +15,7 @@ Abfrage=PR_SUCHEWERTE
 @CODE2='mMER'
 @GLEICH2='%'
 
-| weitere Abfrageparameter
+| weitere optionale Abfrageparameter
 |@AKTIV=1
 |@LAUF=7
 |@MULTITYP=4
@@ -23,6 +24,7 @@ Abfrage=PR_SUCHEWERTE
 @PROBEAKTIV=1
 
 | Welche Felder sollen inkludiert werden (optional)
+| Wenn die folgende Zeile auskommentiert wird, werden alle verfügbaren Spalten zurückgegeben.
 Felder=AUFTRAGNR,AUFTRAGDAT,PATISTAMMNR,PATIFALLNR,SCHEINID,EINSCODE,ABNAHMEDAT,ERGEBNIST1,ERGEBNIST2
 
 | ExportZiel: Pfad der Exportdatei.

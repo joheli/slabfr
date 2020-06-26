@@ -70,12 +70,12 @@ public class Helfer {
         while ((z = iS.readLine()) != null) {
             if (!z.startsWith("|")) {
                 StringTokenizer sT = new StringTokenizer(z, "=");
-                if (sT.countTokens()>1) parameter.put(sT.nextToken(), sT.nextToken());
+                if (sT.countTokens() > 1) parameter.put(sT.nextToken(), sT.nextToken());
             }
         }
         iS = null;
         
-        String[] erforderlicheParameter = {"@DATUMVON", "@DATUMBIS", "TagSchwelle", "ExportZiel","Abfrage","IP"};
+        String[] erforderlicheParameter = {"@DATUMVON", "@DATUMBIS", "ExportZiel","Abfrage","IP"};
         
         Boolean allesOk = true;
         
@@ -86,6 +86,9 @@ public class Helfer {
         if (!allesOk) {
             throw new Parameterdateifehler("Parameterdatei " + parameterDatei.getCanonicalPath() + " nicht komplett auslesbar.");
         }
+        
+        // Standardwerte
+        if (!parameter.containsKey("TagSchwelle")) parameter.put("TagSchwelle", "28");
         
         return parameter;
     }
