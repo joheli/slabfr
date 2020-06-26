@@ -9,3 +9,6 @@ build
 slabfr.Rproj
 .Rhistory
 
+# Ignore log output
+slabfr.Start_log*
+
