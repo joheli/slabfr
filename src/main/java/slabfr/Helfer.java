@@ -27,7 +27,7 @@ public class Helfer {
     public final static String SL_DRIVER = "net.sourceforge.jtds.jdbc.Driver";
     public final static String CALL_START_1 = "{call dbo.";
     // zwischen CALL_START_1 und CALL_START_2 befindet sich der Name der Prozedur
-    // also z.B. PR_MIKROSTAT f?r Resistenzstatistik oder PR_SUCHEWERTE für andere Recherchen
+    // also z.B. PR_MIKROSTAT für Resistenzstatistik oder PR_SUCHEWERTE für andere Recherchen
     public final static String CALL_START_2 = "(@DATUMVON=?, @DATUMBIS=?, ";
     public final static String CALL_END = ")}";
     private final static Logger logger = Logger.getLogger(Start.class.getName());
