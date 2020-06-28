@@ -4,8 +4,9 @@
 
 `slabfr` ist ein einfaches Abfrageprogramm für das Laborinformationssystem [Swisslab](https://www.nexus-swisslab.de). Folgende Eigenschaften unterscheiden es von den Swisslab-eigenen Abfragewerkzeugen:
 
-  * zeitgesteuerter und automatisierter Einsatz 
-  * Abfrage von langen Zeitabschnitten auch über viele Jahre
+  * möglicher zeitgesteuerter und automatisierter Einsatz
+  * möglicher prospektiver Einsatz mit Anfrage von relativen Zeitfenstern ab Abfragedatum
+  * mögliche Abfrage von langen Zeitabschnitten auch über viele Jahre
   * Einsatz auf verschiedenen Betriebssystemen, welche eine Java-Laufzeitumgebung vorhalten
 
 ## Voraussetzungen
@@ -37,5 +38,8 @@ Abhängig vom Betriebssystem muss die Datei `slabfr.bat` (für Windows) oder `sl
 
 Die Zeitsteuerung kann über Bordmittel des Betriebssystems eingerichtet werden. Für Linux eignet sich das Programm `cron`, wohingegen bei Windows die "Aufgabenplanung" eingesetzt werden kann. 
 
+## Ausführbare Version
+
+Siehe unter 'releases'.
 
 
