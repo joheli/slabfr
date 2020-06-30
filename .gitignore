@@ -5,6 +5,7 @@
 build
 
 # Ignore R project files
+.RData
 .Rproj.user
 slabfr.Rproj
 .Rhistory
