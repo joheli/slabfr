@@ -14,7 +14,7 @@ import java.util.logging.SimpleFormatter;
 
 public class Start implements Runnable {
 
-	private static String version = "0.4.7";
+	private static String version = "0.4.8";
 	Logger logger;
 	FileHandler fH;
 	private boolean veraendereExportZiel = false;
@@ -22,7 +22,7 @@ public class Start implements Runnable {
 
 	public Start() throws SecurityException, IOException {
 		this.logger = Logger.getLogger(this.getClass().getName());
-		this.fH = new FileHandler(this.getClass().getName() + "_log.txt", true);
+		this.fH = new FileHandler("slabfr.log", true);
 		fH.setFormatter(new SimpleFormatter());
 		logger.addHandler(fH);
 	}

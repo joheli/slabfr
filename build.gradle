@@ -19,6 +19,15 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+tasks.withType(CreateStartScripts) {
+  def tpl_u = 'script_templates/custom_unix.txt'
+  def tpl_w = 'script_templates/custom_windows.txt'
+  assert project.file(tpl_u).exists()
+  assert project.file(tpl_w).exists()
+  unixStartScriptGenerator.template = resources.text.fromFile(tpl_u)
+  windowsStartScriptGenerator.template = resources.text.fromFile(tpl_w)
+}
+
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
