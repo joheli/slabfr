@@ -40,6 +40,10 @@ Die Zeitsteuerung kann über Bordmittel des Betriebssystems eingerichtet werden.
 
 ## Ausführbare Version
 
-Siehe unter 'releases'.
+Siehe unter 'Releases'.
+
+## Tipp
+
+Das Programm `slabfr` kann mit dem Programm [DaBaDEx](https://github.com/joheli/DaBaDEx) kombiniert werden, um Daten z.B. in eine Überwachgungsdatenbank zu transferieren.
 
 
