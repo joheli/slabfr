@@ -2,6 +2,8 @@
 
 ![](https://github.com/joheli/slabfr/workflows/Java%20CI/badge.svg)
 
+[english](README_en.md)
+
 `slabfr` ist ein einfaches Abfrageprogramm für das Laborinformationssystem [Swisslab](https://www.nexus-swisslab.de). Folgende Eigenschaften unterscheiden es von den Swisslab-eigenen Abfragewerkzeugen:
 
   * möglicher zeitgesteuerter und automatisierter Einsatz
