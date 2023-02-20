@@ -14,7 +14,7 @@ import java.util.logging.SimpleFormatter;
 
 public class Start implements Runnable {
 
-	private static String version = "0.4.8";
+	private static String version = "0.4.9";
 	Logger logger;
 	FileHandler fH;
 	private boolean veraendereExportZiel = false;
