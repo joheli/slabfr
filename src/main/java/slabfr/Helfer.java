@@ -180,7 +180,7 @@ public class Helfer {
     
     public static Calendar calDatum(String datum) throws SQLDatumException {
         StringTokenizer sT = new StringTokenizer(datum, ".");
-        if (sT.countTokens() != 3) throw new SQLDatumException("Datum ung?ltig!");
+        if (sT.countTokens() != 3) throw new SQLDatumException("Datum ungültig!");
         int tag = Integer.valueOf(sT.nextToken());
         int monat = Integer.valueOf(sT.nextToken()) - 1;
         int jahr = Integer.valueOf(sT.nextToken());

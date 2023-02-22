@@ -11,6 +11,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import java.util.Properties;
 
 public class Start implements Runnable {
 
@@ -19,12 +20,16 @@ public class Start implements Runnable {
 	FileHandler fH;
 	private boolean veraendereExportZiel = false;
 	private HashMap<String, String> p;
+	private Properties connectionInfo = new Properties();
 
 	public Start() throws SecurityException, IOException {
 		this.logger = Logger.getLogger(this.getClass().getName());
 		this.fH = new FileHandler("slabfr.log", true);
 		fH.setFormatter(new SimpleFormatter());
 		logger.addHandler(fH);
+		// connectionInfo contains user, password etc.
+		connectionInfo.setProperty("user", System.getenv("SL_USER"));
+		connectionInfo.setProperty("password", System.getenv("SL_PASS"));
 	}
 
 	private void abfrageProzedur() {
@@ -102,6 +107,14 @@ public class Start implements Runnable {
 						pOD.add(Integer.valueOf(parWert));
 					}
 				}
+				
+				// Einlesen in Verbindungsparameter für Ergänzung der connectionInfo, siehe DatenDBHoler
+				if (ky.startsWith("§")) {
+				  logger.log(Level.FINE, "Zusaetzliche Verbindungsparameter gefunden! 'connectionInfo' wird entsprechend ergaenzt.");
+				  String cPropertyName = ky.substring(1); // remove '§'
+				  String cPropertyValue = p.get(ky);
+				  connectionInfo.setProperty(cPropertyName, cPropertyValue);
+				}
 			}
 
 			// String call erstellen
@@ -134,6 +147,7 @@ public class Start implements Runnable {
 					parameter[0] = Helfer.cal2sqlDate(dKette.get(x)[0]);
 					parameter[1] = Helfer.cal2sqlDate(dKette.get(x)[1]);
 
+					// die restlichen Einträge bestehen aus pOD (Parameter ohne Datum)
 					for (int y = 0; y < pOD.size(); y++) {
 						parameter[2 + y] = pOD.get(y);
 					}
@@ -141,7 +155,7 @@ public class Start implements Runnable {
 					logger.log(Level.FINE,
 							"übermittle Teilabfrage {0} ...", anzAbfragen);
 					anzAbfragen++;
-					dbh = new DatenDBHoler(ip, call, parameter, ausgabeFelder);
+					dbh = new DatenDBHoler(ip, call, parameter, ausgabeFelder, connectionInfo);
 					
 					Helfer.abfrageZuCSVSchreiber(dbh, ";", exportZiel, anhaengen | (x > 0));
 
@@ -162,7 +176,7 @@ public class Start implements Runnable {
 					parameter[2 + y] = pOD.get(y);
 				}
 
-				dbh = new DatenDBHoler(ip, call, parameter, ausgabeFelder);
+				dbh = new DatenDBHoler(ip, call, parameter, ausgabeFelder, connectionInfo);
 				
 				Helfer.abfrageZuCSVSchreiber(dbh, ";", exportZiel, anhaengen);
 

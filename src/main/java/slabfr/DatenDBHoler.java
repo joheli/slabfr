@@ -8,45 +8,49 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Properties;
 
 public class DatenDBHoler extends DateiLeser {
 
-	private Connection con;
+	  private Connection con;
     private String call;
     private Object[] parameter;
     private String[] feldBezeichnungen = null;
     private String ip;
     private String[] ausgabeFelder = null;
+    private Properties connectionInfo;
     private final static Logger logger = Logger.getLogger(Start.class.getName());
 
     /**
      * Creates a new instance of DatenDBHoler
      */
-    public DatenDBHoler(String ip, String call, Object[] parameter) throws SQLException, ClassNotFoundException {
-        this.call = call;
-        this.parameter = parameter;
-        this.ip = ip;
-        verbindungsEinsteller();
-        tabellenHoler();
+     
+    public DatenDBHoler(String ip, String call, Object[] parameter, Properties connectionInfo) throws SQLException, ClassNotFoundException {
+        this(ip, call, parameter, null, connectionInfo);
     }
-
-    public DatenDBHoler(String ip, String call, Object[] parameter, String[] ausgabeFelder) throws SQLException, ClassNotFoundException {
+    
+    public DatenDBHoler(String ip, String call, Object[] parameter, String[] ausgabeFelder, Properties connectionInfo) throws SQLException, ClassNotFoundException {
         this.call = call;
         this.parameter = parameter;
         this.ip = ip;
         this.ausgabeFelder = ausgabeFelder;
+        this.connectionInfo = connectionInfo;
         verbindungsEinsteller();
         tabellenHoler();
     }
 
     private void verbindungsEinsteller() throws SQLException, ClassNotFoundException {
-        logger.log(Level.FINEST, "Versuche Verbindung zu {0} herzustellen...", ip);
+        logger.log(Level.FINE, "Versuche Verbindung zu {0} herzustellen...", ip);
         String sl_dburl = "jdbc:jtds:sybase://" + ip;
         Class.forName(Helfer.SL_DRIVER);
-		    String sl_user = System.getenv("SL_USER"); // Umgebungsvariable muss gesetzt sein!
-		    String sl_pass = System.getenv("SL_PASS"); // Umgebungsvariable muss gesetzt sein!
-        this.con = DriverManager.getConnection(sl_dburl, sl_user, sl_pass);
-        logger.finest("Verbindung steht.");
+        // copyConnectionInfo ist eine Kopie von connectionInfo, welches in die LogDatei geschrieben werden kann
+        Properties copyConnectionInfo = (Properties) connectionInfo.clone();
+        copyConnectionInfo.setProperty("user", "XXX"); // überschreibe "user"
+        copyConnectionInfo.setProperty("password", "XXX"); // überschreibe "password"
+        logger.log(Level.FINE, "Inhalt von connectionInfo: {0}", copyConnectionInfo.toString());
+        // Verbindung mit url und connectionInfo herstellen
+        this.con = DriverManager.getConnection(sl_dburl, connectionInfo);
+        logger.fine("Verbindung steht.");
     }
 
     public String toString() {
