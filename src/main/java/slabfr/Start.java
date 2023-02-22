@@ -24,6 +24,7 @@ public class Start implements Runnable {
 
 	public Start() throws SecurityException, IOException {
 		this.logger = Logger.getLogger(this.getClass().getName());
+		logger.finest("Logger mit Namen {0} erstellt.", logger.getName());
 		this.fH = new FileHandler("slabfr.log", true);
 		fH.setFormatter(new SimpleFormatter());
 		logger.addHandler(fH);
@@ -32,6 +33,8 @@ public class Start implements Runnable {
 		this.connectionInfo = new Properties();
 		connectionInfo.setProperty("user", System.getenv("SL_USER"));
 		connectionInfo.setProperty("password", System.getenv("SL_PASS"));
+		// Log
+		log.finest("'Start' erfolgreich initiiert.");
 	}
 	
 	private Level levelFromEnvironment() {
