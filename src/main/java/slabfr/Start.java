@@ -20,7 +20,7 @@ public class Start implements Runnable {
 	FileHandler fH;
 	private boolean veraendereExportZiel = false;
 	private HashMap<String, String> p;
-	private Properties connectionInfo = new Properties();
+	private Properties connectionInfo;
 
 	public Start() throws SecurityException, IOException {
 		this.logger = Logger.getLogger(this.getClass().getName());
@@ -28,6 +28,7 @@ public class Start implements Runnable {
 		fH.setFormatter(new SimpleFormatter());
 		logger.addHandler(fH);
 		// connectionInfo contains user, password etc.
+		this.connectionInfo = new Properties();
 		connectionInfo.setProperty("user", System.getenv("SL_USER"));
 		connectionInfo.setProperty("password", System.getenv("SL_PASS"));
 	}
