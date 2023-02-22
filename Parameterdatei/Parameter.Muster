@@ -26,16 +26,28 @@ Abfrage=PR_SUCHEWERTE
 @MITPROBE=1
 @PROBEAKTIV=1
 
-| Welche Felder sollen inkludiert werden (optional)
+| Welche Felder sollen inkludiert werden (optional)?
 | Wenn die folgende Zeile auskommentiert wird, werden alle verfügbaren Spalten zurückgegeben.
 Felder=AUFTRAGNR,AUFTRAGDAT,PATISTAMMNR,PATIFALLNR,SCHEINID,EINSCODE,ABNAHMEDAT,ERGEBNIST1,ERGEBNIST2
 
-| ExportZiel: Pfad der Exportdatei.
+| ExportZiel: Pfad der Exportdatei
 ExportZiel=test.csv
 
-| TagSchwelle: Um größere Zeiträume abzudecken, ist es erforderlich, diese zu zerteilen, da diese von den Prozeduren
-| nicht bearbeitet werden.
-| Der Standardwert ist 28 Tage, d.h. der von @DATUMVON und @DATUMBIS abgesteckte Zeitraum wird in Stücke von 28 Tagen
-| Länge zerteilt, die nach und nach abgefragt werden.
+| TagSchwelle: Um größere Zeiträume abzudecken, ist es erforderlich, diese zu zerteilen, 
+| da diese von den Prozeduren nicht bearbeitet werden.
+| Der Standardwert ist 28 Tage, d.h. der von @DATUMVON und @DATUMBIS abgesteckte Zeitraum 
+| wird in Stücke von 28 Tagen Länge zerteilt, die nach und nach abgefragt werden.
 | Zur Änderung bitte folgende Zeile entkommentieren:
+|
 | TagSchwelle=28
+
+| Zusätzliche optionale Verbindungsparameter bei Bedarf
+| 
+| Für manche Verbindungen sind zusätzliche Informationen an den Server erforderlich.
+| Bitte versehen Sie die zu übermittelnden Parameter mit dem Präfix '§'.
+| Aktivieren Sie die Übertragung durch Entkommentierung (d.h. Entfernung des Zeichens '|' zu Beginn der Zeile.)
+|
+| §ssl=require
+| §integratedSecurity=true
+| §trustServerCertificate=true
+

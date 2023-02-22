@@ -27,10 +27,27 @@ public class Start implements Runnable {
 		this.fH = new FileHandler("slabfr.log", true);
 		fH.setFormatter(new SimpleFormatter());
 		logger.addHandler(fH);
+		logger.setLevel(levelFromEnvironment());
 		// connectionInfo contains user, password etc.
 		this.connectionInfo = new Properties();
 		connectionInfo.setProperty("user", System.getenv("SL_USER"));
 		connectionInfo.setProperty("password", System.getenv("SL_PASS"));
+	}
+	
+	private Level levelFromEnvironment() {
+	  Level lvl = Level.INFO; // this is the default value.
+	  String lvl_e = System.getenv("SLABFR_LOGLEVEL"); // if not set it will be null
+	  if (lvl_e != null) {
+	    try {
+	      lvl = Level.parse(lvl_e);
+	      logger.log(Level.CONFIG, "'SLABFR_LOGLEVEL' was set to " + lvl_e + ".");
+	    } catch (Exception e) {
+	      logger.log(Level.WARNING, "Content of 'SLABFR_LOGLEVEL' (" + lvl_e + ") could not be successfully translated to valid log level.");
+	    } // if it doesn't work don't bother further.
+	  } else {
+	    logger.log(Level.CONFIG, "Environment variable 'SLABFR_LOGLEVEL' was not set. Using default level.");
+	  }
+	  return lvl;
 	}
 
 	private void abfrageProzedur() {
@@ -152,9 +169,13 @@ public class Start implements Runnable {
 					for (int y = 0; y < pOD.size(); y++) {
 						parameter[2 + y] = pOD.get(y);
 					}
-
+          
+          Object[] logParams = new Object[3];
+          logParams[0] = anzAbfragen;
+          logParams[1] = parameter[0].toString();
+          logParams[2] = parameter[1].toString();
 					logger.log(Level.FINE,
-							"übermittle Teilabfrage {0} ...", anzAbfragen);
+							"übermittle Teilabfrage {0} (Zeitraum {1} bis {2})", logParams);
 					anzAbfragen++;
 					dbh = new DatenDBHoler(ip, call, parameter, ausgabeFelder, connectionInfo);
 					

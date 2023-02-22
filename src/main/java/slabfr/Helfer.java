@@ -25,6 +25,7 @@ import java.util.regex.Pattern;
 public class Helfer {
     
     public final static String SL_DRIVER = "net.sourceforge.jtds.jdbc.Driver";
+    // public final static String SL_DRIVER = "com.sybase.jdbc3.jdbc.SybDriver";
     public final static String CALL_START_1 = "{call dbo.";
     // zwischen CALL_START_1 und CALL_START_2 befindet sich der Name der Prozedur
     // also z.B. PR_MIKROSTAT für Resistenzstatistik oder PR_SUCHEWERTE für andere Recherchen

@@ -1,10 +1,11 @@
 package slabfr;
 
-import java.sql.CallableStatement;
+/* import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.SQLException; */
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,11 +26,11 @@ public class DatenDBHoler extends DateiLeser {
      * Creates a new instance of DatenDBHoler
      */
      
-    public DatenDBHoler(String ip, String call, Object[] parameter, Properties connectionInfo) throws SQLException, ClassNotFoundException {
+    public DatenDBHoler(String ip, String call, Object[] parameter, Properties connectionInfo) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         this(ip, call, parameter, null, connectionInfo);
     }
     
-    public DatenDBHoler(String ip, String call, Object[] parameter, String[] ausgabeFelder, Properties connectionInfo) throws SQLException, ClassNotFoundException {
+    public DatenDBHoler(String ip, String call, Object[] parameter, String[] ausgabeFelder, Properties connectionInfo) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         this.call = call;
         this.parameter = parameter;
         this.ip = ip;
@@ -39,10 +40,12 @@ public class DatenDBHoler extends DateiLeser {
         tabellenHoler();
     }
 
-    private void verbindungsEinsteller() throws SQLException, ClassNotFoundException {
+    private void verbindungsEinsteller() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         logger.log(Level.FINE, "Versuche Verbindung zu {0} herzustellen...", ip);
         String sl_dburl = "jdbc:jtds:sybase://" + ip;
-        Class.forName(Helfer.SL_DRIVER);
+        // String sl_dburl = "jdbc:sybase:Tds:" + ip;
+        // Class.forName(Helfer.SL_DRIVER);
+        DriverManager.registerDriver((Driver) Class.forName(Helfer.SL_DRIVER).newInstance());
         // copyConnectionInfo ist eine Kopie von connectionInfo, welches in die LogDatei geschrieben werden kann
         Properties copyConnectionInfo = (Properties) connectionInfo.clone();
         copyConnectionInfo.setProperty("user", "XXX"); // überschreibe "user"
