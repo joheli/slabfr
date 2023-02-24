@@ -30,7 +30,18 @@ erforderlich.
 
 ### Umgebungsvariablen
 
-Der Zugriff auf die Swisslab Datenbank erfordert Kontodaten, die in Form von Umgebungsvariablen bereitgestellt werden müssen. `SL_USER` muss hierbe den zugreifenden Nutzer, `SL_PASS` das zugehörige Passwort beinhalten.
+Das Programm wird durch verschiedene Umgebungsvariablen gesteuert.
+
+#### Verbindung zur Datenbank und Authentifizierung
+
+Der Zugriff auf die Swisslab Datenbank erfordert Kontodaten, die in Form von Umgebungsvariablen bereitgestellt werden müssen! 
+  - `SL_USER` beinhaltet Nutzer
+  - `SL_PASS` beinhaltet das zugehörige Passwort 
+  
+Weitere ev. notwendige Verbindungsinformationen können in der [Parameterdatei](Parameterdatei/Parameter.Muster) mit dem Präfix '§' (siehe dort) angegeben werden.
+
+#### Logniveau
+Die optionale Variable `SLABFR_LOGLEVEL` steuert die Feinheit der Logeinträge; mögliche Angaben sind `SEVERE`, `WARNING`, `INFO`, `CONFIG`, `FINE`, `FINER` und `FINEST`.
 
 ### Aufruf
 
@@ -46,6 +57,6 @@ Siehe unter 'Releases'.
 
 ## Tipp
 
-Das Programm `slabfr` kann mit dem Programm [DaBaDEx](https://github.com/joheli/DaBaDEx) kombiniert werden, um Daten z.B. in eine Überwachgungsdatenbank zu transferieren.
+Das Programm `slabfr` kann mit dem Programm [DaBaDEx](https://github.com/joheli/DaBaDEx) kombiniert werden, um Daten z.B. in eine Überwachungsdatenbank zu transferieren.
 
 

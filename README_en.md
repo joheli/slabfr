@@ -28,11 +28,21 @@ The program just uses one positional argument specifying the parameter file. The
 
 ### Environment variables
 
-Access to the Swisslab database requires credentials, which currently have to be passed via environmental variables. Here, `SL_USER` specifies the user, while `SL_PASS` must contain a valid password.
+#### Connection and authentication
+
+Access to the Swisslab database requires credentials to be passed via environmental variables. 
+  - `SL_USER` specifies the user 
+  - `SL_PASS` contains the password
+  
+Further connection information may be necessary (e.g. `ssl=required` etc.), which can be entered into the [parameter file](Parameterdatei/Parameter.Muster) using the prefix '§' (e.g. `§ssl=required`).
+
+#### Log level
+
+The optional environment variable `SLABFR_LOGLEVEL` controls verbosity of logging; values `SEVERE` (highest value), `WARNING`, `INFO`, `CONFIG`, `FINE`, `FINER`, and `FINEST` (lowest value) can be used.
 
 ### Call
 
-Please type `./slabfr {Parameterdatei}` or `slabfr.bat {Parameterdatei}` for operating systems Windows or Linux, respectively.
+Please type `./slabfr {parameter file}` or `slabfr.bat {parameter file}` for operating systems Windows or Linux, respectively.
 
 ### Scheduled use
 
