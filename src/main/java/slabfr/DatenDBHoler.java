@@ -26,18 +26,23 @@ public class DatenDBHoler extends DateiLeser {
      * Creates a new instance of DatenDBHoler
      */
      
-    public DatenDBHoler(String ip, String call, Object[] parameter, Properties connectionInfo) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public DatenDBHoler(String ip, String call, Object[] parameter, Properties connectionInfo) {
         this(ip, call, parameter, null, connectionInfo);
     }
     
-    public DatenDBHoler(String ip, String call, Object[] parameter, String[] ausgabeFelder, Properties connectionInfo) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public DatenDBHoler(String ip, String call, Object[] parameter, String[] ausgabeFelder, Properties connectionInfo) {
         this.call = call;
         this.parameter = parameter;
         this.ip = ip;
         this.ausgabeFelder = ausgabeFelder;
         this.connectionInfo = connectionInfo;
-        verbindungsEinsteller();
-        tabellenHoler();
+        try {
+          verbindungsEinsteller();
+          tabellenHoler();
+          kappeVerbindung();
+        } catch (Exception e) {
+          logger.log(Level.SEVERE, "DatenDBHoler war nnicht erfolgreich. Folgender Fehler wurde gemeldet: {0}", e.getMessage());
+        }
     }
 
     private void verbindungsEinsteller() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -53,18 +58,7 @@ public class DatenDBHoler extends DateiLeser {
         logger.log(Level.FINE, "Inhalt von connectionInfo: {0}", copyConnectionInfo.toString());
         // Verbindung mit url und connectionInfo herstellen
         this.con = DriverManager.getConnection(sl_dburl, connectionInfo);
-        logger.fine("Verbindung steht.");
-    }
-
-    public String toString() {
-        String returnString = "";
-    	for (String[] z : this) {
-            for (String f : z) {
-                returnString = returnString + f + "|";
-            }
-            returnString = returnString + System.getProperty("line.separator");
-        }
-    	return returnString;
+        logger.log(Level.FINEST, "Verbindung {0} steht.", con.toString());
     }
 
     public String[] getFeldBezeichnungen() {
@@ -124,8 +118,19 @@ public class DatenDBHoler extends DateiLeser {
 
         logger.log(Level.FINEST, "Abfrage erfolgreich. Es wurden {0} Datensätze zurückgeliefert.", zeilenAnz);
 
-        rs = null;
-        cs = null;
+        //rs = null;
+        //cs = null;
+        rs.close();
+        logger.log(Level.FINEST, "ResultSet {0} geschlossen.", rs.toString());
+        cs.close(); 
+        logger.log(Level.FINEST, "Statement {0} geschlossen.", cs.toString());
         first();
+    }
+    
+    private void kappeVerbindung() throws SQLException {
+      if (con != null) {
+        con.close();
+        logger.log(Level.FINEST, "Verbindung {0} geschlossen.", con.toString());
+      }
     }
 }

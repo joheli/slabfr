@@ -336,7 +336,7 @@ public class Helfer {
         bW = null;
     }
     
-    private static class SQLDatumException extends Exception {
+    public static class SQLDatumException extends Exception {
 
   		private static final long serialVersionUID = 1L;
   
@@ -345,7 +345,7 @@ public class Helfer {
       }
     }
     
-    private static class Parameterdateifehler extends Exception {
+    public static class Parameterdateifehler extends Exception {
 
   		private static final long serialVersionUID = 1L;
   
